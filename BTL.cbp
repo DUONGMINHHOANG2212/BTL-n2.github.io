@@ -34,10 +34,14 @@
 		</Compiler>
 		<Unit filename="BaseObject.cpp" />
 		<Unit filename="BaseObject.h" />
+		<Unit filename="Bullet.cpp" />
+		<Unit filename="Bullet.h" />
 		<Unit filename="CommonFun.cpp" />
 		<Unit filename="CommonFun.h" />
 		<Unit filename="MainObject.cpp" />
 		<Unit filename="MainObject.h" />
+		<Unit filename="Threats.cpp" />
+		<Unit filename="Threats.h" />
 		<Unit filename="game_map.cpp" />
 		<Unit filename="game_map.h" />
 		<Unit filename="main.cpp" />
