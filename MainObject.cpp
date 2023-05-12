@@ -4,9 +4,9 @@
 MainObject::MainObject()
 {
     frame_ = 0;
-    x_pos_ = 0;
+    x_pos_ = 0;//vị trí nhân vật
     y_pos_ = 0;
-    x_val_ = 0;
+    x_val_ = 0;//ấn phải trái sẽ di chuyển bao nhiêu
     y_val_ = 0;
     width_frame_ = 0;
     height_frame_ = 0;
@@ -137,7 +137,7 @@ void MainObject::Show(SDL_Renderer* des)
     }
 }
 
-void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
+void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk* g_sound[2])
 {
     int left = 0;
     if(events.type == SDL_KEYDOWN)
@@ -218,18 +218,22 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
             if(money_count<20)
             {
                 p_bullet-> LoadImg("image/bullet/b4.png", screen);
+                Mix_PlayChannel(-1,g_sound[0],0);//am thanh khi ban
             }
             else if(money_count<40)
             {
                 p_bullet-> LoadImg("image/bullet/b6.png", screen);
+                 Mix_PlayChannel(-1,g_sound[0],0);//am thanh khi ban
             }
             else if(money_count<60)
             {
                 p_bullet-> LoadImg("image/bullet/la1.png", screen);
+                 Mix_PlayChannel(-1,g_sound[0],0);//am thanh khi ban
             }
             else
             {
                 p_bullet-> LoadImg("image/bullet/la3.png", screen);
+                 Mix_PlayChannel(-1,g_sound[0],0);//am thanh khi ban
             }
 
             if(status_ == WALK_LEFT)
@@ -276,7 +280,7 @@ void MainObject::HandleBullet(SDL_Renderer* des)
         }
     }
 }
-
+//va chạm đạn của nv và quái
 void MainObject::RemoveBullet(const int& index)
 {
     int siz = p_bullet_list.size();
@@ -289,7 +293,7 @@ void MainObject::RemoveBullet(const int& index)
         {
             delete p_bullet;
             p_bullet = NULL;
-            //money_count++;
+            money_count++;//giết quái cộng điểm
         }
     }
 }

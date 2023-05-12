@@ -29,7 +29,7 @@ class MainObject : public BaseObject
         bool LoadImg(std::string path, SDL_Renderer* screen);
         void Show(SDL_Renderer* des); // show tung frame
         // Ham xu ly su kien len xuong trai phai
-        void HandelInputAction(SDL_Event events, SDL_Renderer* screen);
+        void HandelInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk* g_sound[2]);
         void set_clips();//hieu ung animation
 
         void DoPalyer(Map& map_data); // di chuyen
@@ -46,7 +46,7 @@ class MainObject : public BaseObject
 
         std::vector<BulletObj*> get_bullet_list() const {return p_bullet_list;}
         void HandleBullet(SDL_Renderer* des);
-        void RemoveBullet(const int& index);
+        void RemoveBullet(const int& index);//xóa đạn
         void set_comeback_time(const int& cb_time){comeback_time=cb_time;}
         int get_NUM_DIE() const {return NUM_DIE;}
         int SetScore(const int& score_threats){money_count+=score_threats;}

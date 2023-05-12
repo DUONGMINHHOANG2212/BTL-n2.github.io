@@ -1,0 +1,179 @@
+# depslib dependency file v1.0
+1678721714 source:c:\users\admin\documents\game.cpp\btl\baseobject.cpp
+	"BaseObject.h"
+
+1678721714 c:\users\admin\documents\game.cpp\btl\baseobject.h
+	"CommonFun.h"
+
+1678721714 c:\users\admin\documents\game.cpp\btl\commonfun.h
+	<windows.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<string>
+	<bits/stdc++.h>
+	<vector>
+
+1677135947 c:\users\admin\downloads\sdl2_image-devel-2.6.3-mingw\sdl2_image-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1677135937 c:\users\admin\downloads\sdl2_mixer-devel-2.6.3-mingw\sdl2_mixer-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1677135922 c:\users\admin\downloads\sdl2_ttf-devel-2.20.2-mingw\sdl2_ttf-2.20.2\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1680148934 source:c:\users\admin\documents\game.cpp\btl\bullet.cpp
+	"Bullet.h"
+
+1680148934 c:\users\admin\documents\game.cpp\btl\bullet.h
+	"BaseObject.h"
+	"CommonFun.h"
+
+1678721714 source:c:\users\admin\documents\game.cpp\btl\commonfun.cpp
+	"CommonFun.h"
+
+1679328159 source:c:\users\admin\documents\game.cpp\btl\game_map.cpp
+	"game_map.h"
+
+1679328159 c:\users\admin\documents\game.cpp\btl\game_map.h
+	"CommonFun.h"
+	"BaseObject.h"
+
+1680693490 source:c:\users\admin\documents\game.cpp\btl\geometric.cpp
+	"Geometric.h"
+
+1680693490 c:\users\admin\documents\game.cpp\btl\geometric.h
+	"CommonFun.h"
+
+1678954919 source:c:\users\admin\documents\game.cpp\btl\main.cpp
+	"CommonFun.h"
+	"BaseObject.h"
+	"game_map.h"
+	"MainObject.h"
+	"Timer.h"
+	"Threats.h"
+	"Text.h"
+
+1679328214 c:\users\admin\documents\game.cpp\btl\mainobject.h
+	<vector>
+	"CommonFun.h"
+	"BaseObject.h"
+	"Bullet.h"
+
+1680693490 c:\users\admin\documents\game.cpp\btl\timer.h
+	"CommonFun.h"
+	"BaseObject.h"
+
+1680148934 c:\users\admin\documents\game.cpp\btl\threats.h
+	"CommonFun.h"
+	"BaseObject.h"
+	"Bullet.h"
+
+1680693490 c:\users\admin\documents\game.cpp\btl\text.h
+	"CommonFun.h"
+
+1679328214 source:c:\users\admin\documents\game.cpp\btl\mainobject.cpp
+	"MainObject.h"
+
+1680693490 source:c:\users\admin\documents\game.cpp\btl\text.cpp
+	"Text.h"
+
+1680148934 source:c:\users\admin\documents\game.cpp\btl\threats.cpp
+	"Threats.h"
+
+1680693490 source:c:\users\admin\documents\game.cpp\btl\timer.cpp
+	"Timer.h"
+
+1678721714 source:c:\users\admin\documents\game.cpp\btl\debug\baseobject.cpp
+	"BaseObject.h"
+
+1678721714 c:\users\admin\documents\game.cpp\btl\debug\baseobject.h
+	"CommonFun.h"
+
+1682591758 c:\users\admin\documents\game.cpp\btl\debug\commonfun.h
+	<windows.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<string>
+	<bits/stdc++.h>
+	<vector>
+	"Text.h"
+	"BaseObject.h"
+
+1680148934 source:c:\users\admin\documents\game.cpp\btl\debug\bullet.cpp
+	"Bullet.h"
+
+1680148934 c:\users\admin\documents\game.cpp\btl\debug\bullet.h
+	"BaseObject.h"
+	"CommonFun.h"
+
+1682584380 source:c:\users\admin\documents\game.cpp\btl\debug\commonfun.cpp
+	"CommonFun.h"
+
+1679328159 source:c:\users\admin\documents\game.cpp\btl\debug\game_map.cpp
+	"game_map.h"
+
+1679328159 c:\users\admin\documents\game.cpp\btl\debug\game_map.h
+	"CommonFun.h"
+	"BaseObject.h"
+
+1680693490 source:c:\users\admin\documents\game.cpp\btl\debug\geometric.cpp
+	"Geometric.h"
+
+1682608711 c:\users\admin\documents\game.cpp\btl\debug\geometric.h
+	"CommonFun.h"
+
+1683613435 source:c:\users\admin\documents\game.cpp\btl\debug\main.cpp
+	"CommonFun.h"
+	"BaseObject.h"
+	"game_map.h"
+	"MainObject.h"
+	"Timer.h"
+	"Threats.h"
+	"Text.h"
+
+1682592077 c:\users\admin\documents\game.cpp\btl\debug\mainobject.h
+	<vector>
+	"CommonFun.h"
+	"BaseObject.h"
+	"Bullet.h"
+
+1680693490 c:\users\admin\documents\game.cpp\btl\debug\timer.h
+	"CommonFun.h"
+	"BaseObject.h"
+
+1680148934 c:\users\admin\documents\game.cpp\btl\debug\threats.h
+	"CommonFun.h"
+	"BaseObject.h"
+	"Bullet.h"
+
+1682604858 c:\users\admin\documents\game.cpp\btl\debug\text.h
+	"CommonFun.h"
+
+1682606803 source:c:\users\admin\documents\game.cpp\btl\debug\mainobject.cpp
+	"MainObject.h"
+
+1682604858 source:c:\users\admin\documents\game.cpp\btl\debug\text.cpp
+	"Text.h"
+
+1682581482 source:c:\users\admin\documents\game.cpp\btl\debug\threats.cpp
+	"Threats.h"
+
+1680693490 source:c:\users\admin\documents\game.cpp\btl\debug\timer.cpp
+	"Timer.h"
+

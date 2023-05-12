@@ -10,7 +10,7 @@
 
 BaseObject g_background;
 TTF_Font* font_time = NULL;
-
+TTF_Font* font_MENU = NULL;
 using namespace std;
 
 bool InitData()
@@ -45,18 +45,33 @@ bool InitData()
         {
             success = false;
         }
-        font_time = TTF_OpenFont("font/dlxfont_.ttf", FONT_SIZE);
+        font_time = TTF_OpenFont("font//dlxfont_.ttf", FONT_SIZE);
         if(font_time==NULL)
         {
             success = false;
         }
+        font_MENU = TTF_OpenFont("font//dlxfont_.ttf", 50);
+        if (font_MENU == NULL)
+        {
+            success = false;
+        }
+        if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096)==-1)
+        {
+            success=false;
+        }
     }
-      return success;
+
+
+    g_sound[0]=Mix_LoadWAV("sound//Laser.wav");
+    return success;
 }
 
+
+
+//hiện background
 bool LoadBackgroung()
 {
-    bool ret = g_background.LoadBackGr("image/background/3.png", g_screen);
+    bool ret = g_background.LoadBackGr("image/background/8.png", g_screen);
     if(ret==false)
         return false;
 
@@ -100,7 +115,7 @@ std::vector<ThreatsObj*> ThreatsList()
     }
 
     ThreatsObj* threats_objs = new ThreatsObj[20];//threat co dinh
-    for(int i = 0;i < 20; i++)
+    for(int i = 0; i < 20; i++)
     {
         ThreatsObj* p_threat = (threats_objs+i);
         if(p_threat != NULL)
@@ -124,11 +139,20 @@ std::vector<ThreatsObj*> ThreatsList()
 
 int main(int argc, char** argv)
 {
+    bool is_quit = false;
 
     int SCORE = BUG_SCRORE + 1;
     ImpTimer fps_timer;
     if(InitData()==false)
         return -1;
+    //Make menu game
+
+
+    int ret_menu = SDLCommonFun::ShowMenu(g_screen, font_MENU, "Play Game", "Exit", "image//menu.png");
+    if (ret_menu == 1)
+    {
+        is_quit = true;
+    }
     if(LoadBackgroung()==false)
         return -1;
 
@@ -149,7 +173,7 @@ int main(int argc, char** argv)
     score_game.SetColor(TextObj::WHITE_TEXT);
     lifes_game.SetColor(TextObj::WHITE_TEXT);
 
-    bool is_quit = false;
+
     //duy trì ctrinh
     while(!is_quit)
     {
@@ -161,7 +185,7 @@ int main(int argc, char** argv)
                 is_quit=true;
             }
 
-            p_player.HandelInputAction(g_event, g_screen);
+            p_player.HandelInputAction(g_event, g_screen,g_sound);
         }
         // set lại màu cho màn hình
         SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
@@ -204,7 +228,7 @@ int main(int argc, char** argv)
                 bool bCoL1= false;
 
                 std::vector<BulletObj*> threatBullet_list = p_threat->get_bullet_list();
-                for(int jj =0;jj<threatBullet_list.size();++jj)
+                for(int jj =0; jj<threatBullet_list.size(); ++jj)
                 {
 
                     BulletObj* pthreat_bullet= threatBullet_list.at(jj);
@@ -213,11 +237,11 @@ int main(int argc, char** argv)
                         bCoL1 = SDLCommonFun::CheckCollision(pthreat_bullet->GetRect(), rect_player);
                         if(bCoL1)
                         {
-                           //p_threat->RemoveBullet(jj);
-                           if(SCORE>0)
-                           {
-                               SCORE--;
-                           }
+                            //p_threat->RemoveBullet(jj);
+                            if(SCORE>0)
+                            {
+                                SCORE--;
+                            }
 
                         }
 
@@ -225,42 +249,43 @@ int main(int argc, char** argv)
                 }
                 // nhan vat chet
                 SDL_Rect threatRect;
-                        threatRect.x = p_threat->GetRect().x;
-                        threatRect.y = p_threat->GetRect().y;
-                        threatRect.w = p_threat->get_width_frame();
-                        threatRect.h = p_threat->get_height_frame();
-                bool bCol2 = SDLCommonFun::CheckCollision(rect_player, threatRect);
-                if( bCol2|| SCORE == 0 )
+                threatRect.x = p_threat->GetRect().x;
+                threatRect.y = p_threat->GetRect().y;
+                threatRect.w = p_threat->get_width_frame();
+                threatRect.h = p_threat->get_height_frame();
+                 bool bCol2 = SDLCommonFun::CheckCollision(rect_player, threatRect);
+                if( bCol2 || SCORE == 0 )
                 {
-                    if(p_player.get_NUM_DIE()<=3)
+                    if(p_player.get_NUM_DIE()<3)
                     {
-                       // cout<<p_player.get_NUM_DIE()<<endl;
+                        // cout<<p_player.get_NUM_DIE()<<endl;
                         SCORE++;
                         p_player.SetRect(0,0);
-                        p_player.set_comeback_time(60);
-                        SDL_Delay(500);
+                        p_player.set_comeback_time(60);//thời gian trở lại
+                        SDL_Delay(500);//thời gian delay
                         continue;
                     }
                     else
-                    //if(MessageBox(NULL, L"GAME OVER",L"Info", MB_OK | MB_ICONSTOP) == IDOK)
+
                     {
-                        p_threat->Free();
-                        close();
-                        SDL_Quit();
-                        return 0;
+                        int ret_menu = SDLCommonFun::ShowMenuEnd(g_screen, font_MENU, "Exit", "image//menu_lose.png");
+                        if (ret_menu == 1)
+                        {
+                            is_quit = true;
+                        }
                     }
                 }
 
             }
         }
-
+//xử lí va chạm đạn của nv và quái
         std::vector<BulletObj*>bullet_arr = p_player.get_bullet_list();
-        for(int i = 0; i< bullet_arr.size();i++)
+        for(int i = 0; i< bullet_arr.size(); i++)
         {
             BulletObj* p_bullet = bullet_arr.at(i);
             if(p_bullet != NULL)
             {
-                for(int thr=0;thr<threats_list.size();thr++)
+                for(int thr=0; thr<threats_list.size(); thr++)
                 {
                     ThreatsObj* obj_threat = threats_list.at(thr);
                     if(obj_threat != NULL)
@@ -291,8 +316,8 @@ int main(int argc, char** argv)
         std::string str_score= "Score: ";
         std::string str_lifes = "Lifes: ";
 
-        std::string score_val = std::to_string(p_player.GetScore());
-        std::string lifes_val = std::to_string(3-p_player.get_NUM_DIE());
+        std::string score_val = std::to_string(p_player.GetScore());//khai báo điểm
+        std::string lifes_val = std::to_string(3-p_player.get_NUM_DIE());//khai báo mạng
 
         str_score+=score_val;
         str_lifes+=lifes_val;
@@ -306,14 +331,14 @@ int main(int argc, char** argv)
         lifes_game.RenderText(g_screen, SCREEN_WIDTH/2,15);
 
         Uint32 time_val = SDL_GetTicks()/1000;
-        Uint32 val_time = 300-time_val;
+        Uint32 val_time = 360-time_val;
         if(val_time<0)
         {
             //if(MessageBox(NULL, L"GAME OVER",L"Info", MB_OK | MB_ICONSTOP) == IDOK)
-                {
-                    is_quit = true;
-                    break;
-                }
+            {
+                is_quit = true;
+                break;
+            }
         }
         else
         {
@@ -339,7 +364,7 @@ int main(int argc, char** argv)
         }
     }
 
-    for(int i = 0; i< threats_list.size();i++)
+    for(int i = 0; i< threats_list.size(); i++)
     {
         ThreatsObj* p_threat = threats_list.at(i);
         if(p_threat)

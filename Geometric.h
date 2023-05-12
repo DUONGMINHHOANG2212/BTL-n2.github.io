@@ -5,7 +5,7 @@
 #include "CommonFun.h"
 
 typedef struct GeometricFormat
-{
+{//định nghĩa các hàm để vẽ
 public:
     GeometricFormat(int left, int top, int width, int height)
     {

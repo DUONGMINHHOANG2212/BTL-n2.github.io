@@ -12,16 +12,18 @@ BaseObject::BaseObject()
 
 BaseObject::~BaseObject()
 {
-
+    Free();
 }
 
 bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen)
 {
-    SDL_Texture* new_texture = NULL;
-    SDL_Surface* load_surface = IMG_Load(path.c_str());
+    SDL_Texture* new_texture = NULL;// biến cuối cùng kết quả
+    SDL_Surface* load_surface = IMG_Load(path.c_str());// trả ảnh về biến để load ra màn hình
+
     if(load_surface != NULL )
     {
-        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, COLOR_KEY_R, COLOR_KEY_G,COLOR_KEY_B));
+        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, COLOR_KEY_R, COLOR_KEY_G,COLOR_KEY_B));// mã màu để xóa nền
+
         new_texture = SDL_CreateTextureFromSurface(screen, load_surface);
         if(new_texture != NULL)
         {
@@ -35,11 +37,44 @@ bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen)
     return p_object_ != NULL;
 }
 
+bool BaseObject::LoadBackGr(std::string path, SDL_Renderer* screen)
+{
+    SDL_Texture* new_texture = NULL;
+    SDL_Surface* load_surface = IMG_Load(path.c_str());
+    if(load_surface != NULL )
+    {
+        //SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, COLOR_KEY_R, COLOR_KEY_G,COLOR_KEY_B));
+        new_texture = SDL_CreateTextureFromSurface(screen, load_surface);
+        if(new_texture != NULL)
+        {
+            rect_.w=SCREEN_WIDTH;
+            rect_.h=SCREEN_HEIGHT;
+        }
+        SDL_FreeSurface(load_surface);
+    }
+    p_object_=new_texture;
+
+    return p_object_ != NULL;
+}
+
+
 void BaseObject::Render(SDL_Renderer* des, const SDL_Rect* clip)
 {
-    SDL_Rect renderquad = {rect_.x, rect_.y, rect_.w,rect_.h};
-    SDL_RenderCopy(des, p_object_, clip,&renderquad);
-
+    SDL_Rect renderquad = {rect_.x, rect_.y, rect_.w, rect_.h};
+    // đẩy thông số vào des
+    SDL_RenderCopy(des, p_object_, clip, &renderquad);
 }
+
+void BaseObject::Free()
+{
+    if(p_object_ != NULL)
+    {
+        SDL_DestroyTexture(p_object_);
+        p_object_ = NULL;
+        rect_.w = 0;
+        rect_.h = 0;
+    }
+}
+
 
 
